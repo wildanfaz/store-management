@@ -7,7 +7,7 @@ import (
 )
 
 type NewClaims struct {
-	Example string
+	Email string
 	jwt.RegisteredClaims
 }
 

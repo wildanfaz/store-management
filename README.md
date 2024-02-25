@@ -1,6 +1,6 @@
-# Go Template
+# store-management
 
-Simple golang project template
+Store Management is a Go-based application designed to assist in efficient store management. This application provides various features that enable user to manage products and orders with ease.
 
 ## Table of Contents
 
@@ -33,25 +33,27 @@ Simple golang project template
     choco install make
     ```
 
-3. Clone the repository:
+3. Clone the repository
 
     ```bash
-    git clone https://github.com/wildanfaz/go-template.git
+    git clone https://github.com/wildanfaz/store-management.git
     ```
 
-4. Change to the project directory:
+4. Change to the project directory
 
     ```bash
-    cd go-template
+    cd store-management
     ```
 
 ## Usage
 
-1. Start the application using docker:
+1. Start the application using docker
 
     ```bash
-    docker-compose up
+    docker compose up
     ```
+
+2. Open this [postman documentation](https://documenter.getpostman.com/view/22978251/2sA2rDvLAK) to test the endpoints
 
 ## Commands
 
@@ -63,4 +65,14 @@ Simple golang project template
 2. Start the application without docker
     ```bash
     make start
+    ```
+
+3. Migrate database
+    ```bash
+    make migrate
+    ```
+
+4. Rollback database
+    ```bash
+    make rollback
     ```

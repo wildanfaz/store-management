@@ -6,7 +6,6 @@ import (
 )
 
 type Config struct {
-	EchoPort    string
 	JWTSecret   []byte
 	JWTDuration time.Duration
 }
@@ -18,7 +17,6 @@ func InitConfig() *Config {
 	}
 
 	return &Config{
-		EchoPort:    GetEnv("ECHO_PORT", ":1323"),
 		JWTSecret:   []byte(GetEnv("JWT_SECRET", "secret")),
 		JWTDuration: jwtDuration,
 	}

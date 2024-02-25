@@ -1,30 +1,29 @@
 version: '3.8'
 
 services:
-  # MySQL service
-  mysql:
-    image: mysql
-    container_name: mysql_db
-    restart: always
-    volumes:
-      - ./migrations:/docker-entrypoint-initdb.d
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: go-template
-    ports:
-      - "3306:3306"
-
   # Golang application service
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: go-template
+    container_name: store-management
     restart: always
     depends_on:
-      - mysql
+      - postgres
     environment:
-      ECHO_PORT: ":1323"
-      MYSQL_DSN: "root:secret@tcp(host.docker.internal:3306)/go-template?parseTime=true"
+      DATABASE_URL: "postgres://postgres:mysecretpassword@host.docker.internal:5432/store-management"
+      JWT_SECRET: "secret"
+      JWT_DURATION: "1h"
     ports:
-      - "1323:1323"
+      - "8080:8080"
+
+  # Postgres database
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "mysecretpassword"
+      POSTGRES_DB: "store-management"
+    volumes:
+      - ./migrations/migrate.sql:/docker-entrypoint-initdb.d/init.sql
